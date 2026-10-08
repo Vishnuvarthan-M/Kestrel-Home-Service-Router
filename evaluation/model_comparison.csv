@@ -1,0 +1,4 @@
+experiment,target,evaluation_set,features,validation_accuracy,improvement_vs_same_holdout_bot_pp
+Historical routing bot,final_team,Full historical audit,Historical bot initial routing,0.7716688227684346,0.0
+Historical routing bot,final_team,Chronological holdout,Historical bot initial routing,0.7667,0.0
+Final operational model,final_team,Chronological holdout,Word TF-IDF + character TF-IDF + request-time metadata + engineered intent features,0.846189,7.948899999999992
