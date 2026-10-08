@@ -24,12 +24,13 @@ Yes. I did not optimize the final submission to imitate `team_label`. I used `fi
 
 ### What is wrong with what you are handing us, or with the data we handed you?
 
-- This clone does not contain the raw CSV pack, `ops-policy.pdf`, `email-thread.txt`, or the trained model artifact. Data/model paths are git-ignored. Consequently I could inspect saved evidence and validate the submission file's shape, but could not retrain or independently re-run the reported model scores from this workspace.
-- The original policy-cost calculations are not independently auditable here because the policy PDF is absent. The stated ₹305/transfer and ₹260/additional-contact figures should be verified before being treated as actual avoidable savings.
+- The raw CSV pack, operations policy, and email thread were downloaded from the supplied Google Drive folder and used locally. Raw request data and the trained model are excluded from the public Git repository because they contain or derive from client-provided material.
+- The model was retrained locally on the supplied pack. The generated predictions match all 2,178 request IDs in `sample_submission.csv`, with no invalid team names.
+- The stated ₹305/transfer and ₹260/additional-contact figures are policy-based cost references, not guaranteed avoidable savings. They should be checked against observed pilot events before being treated as savings.
 - The hidden-outcome distribution may differ from the holdout. No confidence interval or live pilot result is available.
 - A previous evidence note had stale bot/model correction counts; it has been reconciled to the saved validation predictions (243 / 71 / 262).
-- The generated predictions file could not be compared row-by-row with `sample_submission.csv` because that file is absent. It does match the documented two-column format and 2,178-row count.
-- This working copy has not been pushed with these edits. The public URL below is the cloned upstream repository, not a claim that the upstream already includes this submission.
+- The generated predictions file was checked against the supplied sample: both have 2,178 rows with the expected `request_id,team` columns and identical request IDs.
+- The GitHub URL below is the repository the submitter provided. Confirm that the latest code, README, memo, form, and predictions have been pushed there before submitting; local changes are not automatically uploaded to GitHub.
 
 ### What did you deliberately leave out, and why that rather than something else?
 
@@ -43,16 +44,16 @@ The operational-target audit compares initial routing with eventual resolution, 
 
 For this implementation pass, I used a coding assistant through Copilot SDK in VS Code for repository inspection, code changes, and documentation. The routing product itself uses no external LLM or paid model API; direct paid API spend is **₹0**. Any Copilot subscription cost is not available from this workspace. I discarded paid-API and more complex model approaches in favor of the local, inspectable scikit-learn model.
 
-**Screen recording:** Not recorded or uploaded yet. **Required before submission:** record a walkthrough of the data/target decision, validation, API/UI, and what was changed or discarded (under three minutes), upload it to Google Drive with public viewing enabled, and replace this line with the link.
+**Screen recording:** [Three-minute project walkthrough](https://drive.google.com/file/d/1lZLN4L6RrkHQRklneOM1v-_6VhZtLFjS/view?usp=sharing). Confirm the link is accessible to reviewers.
 
 ### Your Public Google Drive Link
 
-**Pending:** use the public Google Drive link to the screen recording above.
+https://drive.google.com/file/d/1lZLN4L6RrkHQRklneOM1v-_6VhZtLFjS/view?usp=sharing
 
 ### Someone picks this up on Monday and you are unreachable. The three things they need to know.
 
-1. Run in shadow mode first; the model is 84.62% accurate against `final_team` on the saved chronological holdout, not proven safe for autonomous production routing.
-2. The raw client pack and trained model are not in this public repository. Put the supplied CSV files in `data/`, install `requirements.txt`, and run `python src/train_final.py`; without the model, the API reports degraded health and `/route` returns HTTP 503.
+1. Run in shadow mode first; the model is 84.62% accurate against `final_team` on the chronological holdout, not proven safe for autonomous production routing.
+2. The raw client pack and trained model are intentionally excluded from the public repository. Obtain the authorized pack, place its CSVs in `data/`, install `requirements.txt`, and run `python src/train_final.py`. Without a local trained artifact, the API reports degraded health and `/route` returns HTTP 503.
 3. Monitor final-team accuracy, transfers, employee overrides, and costs per channel/product. The ₹3.2 lakh annual vendor fee (about ₹26,667/month) is potential avoided spend only after a successful pilot and renewal decision.
 
 ### Honest hours spent. One number.
@@ -61,7 +62,7 @@ For this implementation pass, I used a coding assistant through Copilot SDK in V
 
 ### Github Repo Link
 
-https://github.com/ermonsterking/kestrel-service-routing
+https://github.com/Vishnuvarthan-M/Kestrel-Home-Service-Router
 
 ### What does one prediction cost, and what would a month cost at Kestrel's volume (about 700 orders a month)? Show the arithmetic. If you used no paid calls, say so.
 
